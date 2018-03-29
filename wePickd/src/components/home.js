@@ -18,7 +18,7 @@ export default class Home extends React.Component {
 	}
 
 	SubmitZip() {
-		console.log(this.state.zip);
+		// console.log(this.state.zip);
 		// fetch(`http://localhost:4000/zip/`, {
 		// 	method: 'POST',
 		// 	headers: {

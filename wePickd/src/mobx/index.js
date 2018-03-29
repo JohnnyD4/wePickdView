@@ -1,7 +1,7 @@
-import movie from './movie';
+import movies from './movie';
 
 const store = {
-	movie,
+	movies,
 }
 
 export default store;
