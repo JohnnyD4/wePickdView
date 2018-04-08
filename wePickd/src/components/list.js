@@ -18,6 +18,7 @@ export default class List extends React.Component {
 		this.state = {
 			movies: '',
 		}
+		this.getMovie = this.getMovie.bind(this);
 	}
 
 	componentWillMount() {
@@ -35,18 +36,23 @@ export default class List extends React.Component {
 		}).then((res) => {
 			const movies = res._bodyInit;
 			this.setState({ movies });
+		}).catch((err) => {
+			throw err;
 		})
-			
-			// const movies = res._bodyInit;
-			// if (movies.length > 0) {
-			// 	// this.props.navigation.push('List', movies);
-			// } else {
-			// 	throw new Error('Sorry no movies');
-			// }
-		// })
 	}
 
-	
+	getMovie(moviePicked) {
+		fetch(`http://localhost:4000/movie/${moviePicked.id}`)
+		.then((res) => {
+			const movie = JSON.parse(res._bodyInit);
+			movie.image = moviePicked.image;
+			this.props.navigation.push('MoviePage', {movie})
+		})
+		.catch((err) => {
+			console.log('ERROR', err);
+			throw err;
+		})
+	}
 	
 
 
@@ -58,10 +64,10 @@ export default class List extends React.Component {
 			isLoading = false;
 			movies = JSON.parse(movies);
 
-			build = movies.map(movie => {
+			build = movies.map((movie, index) => {
 				if (movie) {
 					return (
-						<TouchableOpacity onPress={() => this.props.navigation.push('Movie', {movie})}>
+						<TouchableOpacity key={index} onPress={() => this.getMovie(movie) }>
 							<Text>{movie.title}</Text>
 							<Image
 								key={movie.id}

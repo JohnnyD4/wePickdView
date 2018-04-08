@@ -6,6 +6,7 @@ import { Provider } from 'mobx-react';
 import stores from './src/mobx/index';
 import Home from './src/components/home';
 import List from './src/components/list';
+import MoviePage from './src/components/moviePage';
 import MovieStats from './src/components/movieStats';
 import MovieInfo from './src/components/movieInfo';
 
@@ -23,6 +24,9 @@ export default class App extends React.Component {
       },
       MovieDetails: {
         screen: MovieInfo,
+      },
+      MoviePage: {
+        screen:MoviePage,
       },
     },
     {
