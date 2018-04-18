@@ -23,7 +23,8 @@ export default class List extends React.Component {
 
 	componentWillMount() {
 		const movieList = this.props.navigation.state.params;
-
+		console.log('R E A C H');
+		// console.log(movieList);
 		fetch(`http://localhost:4000/links/`, {
 			method: 'POST',
 			headers: {
@@ -34,9 +35,11 @@ export default class List extends React.Component {
 				list: movieList,
 			})
 		}).then((res) => {
+			// console.log('R E S', res);
 			const movies = res._bodyInit;
 			this.setState({ movies });
 		}).catch((err) => {
+			console.log('E R R', err);
 			throw err;
 		})
 	}
